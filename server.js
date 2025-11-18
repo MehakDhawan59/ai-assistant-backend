@@ -12,7 +12,11 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors()); // Allow cross-origin requests
+app.use(cors({
+  origin: process.env.ALLOWED_ORIGIN || "", 
+  credentials: true
+}));
+ // Allow cross-origin requests
 app.use(express.json()); // Parse JSON bodies
 
 // MongoDB Connection
