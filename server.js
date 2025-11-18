@@ -34,8 +34,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-// Enable preflight for all routes
-app.options("*", cors(corsOptions));
 
 app.use(express.json()); // Parse JSON bodies
 
