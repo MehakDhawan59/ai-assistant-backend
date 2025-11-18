@@ -17,7 +17,8 @@ const allowedOrigins = raw.split(",").map(s => s.trim()).filter(Boolean);
 if (!allowedOrigins.includes("http://localhost:5173")) {
   allowedOrigins.push("http://localhost:5173");
 }
-
+console.log('ALLOWED_ORIGIN env value:', JSON.stringify(process.env.ALLOWED_ORIGIN));
+console.log('allowedOrigins parsed:', allowedOrigins);
 const corsOptions = {
   origin: function (origin, callback) {
     // allow non-browser requests with no origin (curl, server-to-server)
@@ -39,7 +40,8 @@ app.use(express.json()); // Parse JSON bodies
 
 // Optional: set a safe Referrer-Policy header
 app.use((req, res, next) => {
-  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  console.log('Incoming request origin header:', req.headers.origin || '(none)');
+  // res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
   next();
 });
 
